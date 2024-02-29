@@ -7,6 +7,21 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Interface\**" />
+    <Compile Remove="Repository\**" />
+    <Compile Remove="Service\**" />
+    <Content Remove="Interface\**" />
+    <Content Remove="Repository\**" />
+    <Content Remove="Service\**" />
+    <EmbeddedResource Remove="Interface\**" />
+    <EmbeddedResource Remove="Repository\**" />
+    <EmbeddedResource Remove="Service\**" />
+    <None Remove="Interface\**" />
+    <None Remove="Repository\**" />
+    <None Remove="Service\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="7.0.16" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.16" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="7.0.16">
@@ -17,9 +32,13 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Interface\" />
-    <Folder Include="Repository\" />
-    <Folder Include="Service\" />
+    <Folder Include="Controllers\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Application\Application.csproj" />
+    <ProjectReference Include="..\Domain\Domain.csproj" />
+    <ProjectReference Include="..\Infrastructure\Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

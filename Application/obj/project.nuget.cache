@@ -1,0 +1,14 @@
+{
+  "version": 2,
+  "dgSpecHash": "FHinRY4Ri5FRQQDHJK/Jqet4l9rCeJIHZ+ro0lZlZTCKix2VfSDoOK1xFSfJITyvrSUQgNCiIhmv9QaIyayb4w==",
+  "success": true,
+  "projectFilePath": "D:\\CleanArchitecture\\Application\\Application.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\kibic\\.nuget\\packages\\microsoft.identitymodel.abstractions\\7.4.0\\microsoft.identitymodel.abstractions.7.4.0.nupkg.sha512",
+    "C:\\Users\\kibic\\.nuget\\packages\\microsoft.identitymodel.jsonwebtokens\\7.4.0\\microsoft.identitymodel.jsonwebtokens.7.4.0.nupkg.sha512",
+    "C:\\Users\\kibic\\.nuget\\packages\\microsoft.identitymodel.logging\\7.4.0\\microsoft.identitymodel.logging.7.4.0.nupkg.sha512",
+    "C:\\Users\\kibic\\.nuget\\packages\\microsoft.identitymodel.tokens\\7.4.0\\microsoft.identitymodel.tokens.7.4.0.nupkg.sha512",
+    "C:\\Users\\kibic\\.nuget\\packages\\system.identitymodel.tokens.jwt\\7.4.0\\system.identitymodel.tokens.jwt.7.4.0.nupkg.sha512"
+  ],
+  "logs": []
+}

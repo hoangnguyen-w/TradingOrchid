@@ -74,3 +74,10 @@ D:\FPTUniversity\FPT\Support\SWD\TradingOrchid\TradingOrchid\obj\Debug\net7.0\re
 D:\FPTUniversity\FPT\Support\SWD\TradingOrchid\TradingOrchid\obj\Debug\net7.0\TradingOrchid.pdb
 D:\FPTUniversity\FPT\Support\SWD\TradingOrchid\TradingOrchid\obj\Debug\net7.0\TradingOrchid.genruntimeconfig.cache
 D:\FPTUniversity\FPT\Support\SWD\TradingOrchid\TradingOrchid\obj\Debug\net7.0\ref\TradingOrchid.dll
+D:\CleanArchitecture\TradingOrchid\obj\Debug\net7.0\TradingOrchid.csproj.AssemblyReference.cache
+D:\CleanArchitecture\TradingOrchid\obj\Debug\net7.0\TradingOrchid.GeneratedMSBuildEditorConfig.editorconfig
+D:\CleanArchitecture\TradingOrchid\obj\Debug\net7.0\TradingOrchid.AssemblyInfoInputs.cache
+D:\CleanArchitecture\TradingOrchid\obj\Debug\net7.0\TradingOrchid.AssemblyInfo.cs
+D:\CleanArchitecture\TradingOrchid\obj\Debug\net7.0\TradingOrchid.csproj.CoreCompileInputs.cache
+D:\CleanArchitecture\TradingOrchid\obj\Debug\net7.0\TradingOrchid.MvcApplicationPartsAssemblyInfo.cache
+D:\CleanArchitecture\TradingOrchid\obj\Debug\net7.0\TradingOrchid.sourcelink.json

@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("TradingOrchid")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+36a2f3fa798e42728487d551620a2e4975e77c94")]
 [assembly: System.Reflection.AssemblyProductAttribute("TradingOrchid")]
 [assembly: System.Reflection.AssemblyTitleAttribute("TradingOrchid")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

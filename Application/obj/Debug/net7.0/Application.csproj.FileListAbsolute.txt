@@ -14,3 +14,5 @@ D:\CleanArchitecture\Application\obj\Debug\net7.0\Application.dll
 D:\CleanArchitecture\Application\obj\Debug\net7.0\refint\Application.dll
 D:\CleanArchitecture\Application\obj\Debug\net7.0\Application.pdb
 D:\CleanArchitecture\Application\obj\Debug\net7.0\ref\Application.dll
+D:\CleanArchitecture\Application\bin\Debug\net7.0\Application.xml
+D:\CleanArchitecture\Application\obj\Debug\net7.0\Application.xml

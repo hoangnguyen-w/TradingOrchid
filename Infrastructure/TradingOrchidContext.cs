@@ -1,7 +1,10 @@
-﻿using Domain.Entities;
+﻿using Application.Common.Dto;
+using Domain.Entities;
 using Microsoft.EntityFrameworkCore;
+using System.Security.Cryptography;
+using System.Text;
 
-namespace TradingOrchid.Model.Entity
+namespace Infrastructure
 {
     public class TradingOrchidContext : DbContext
     {

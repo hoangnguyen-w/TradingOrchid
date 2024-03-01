@@ -7,16 +7,16 @@ namespace Domain.Entities
     public class Transaction
     {
         [Key]
-        public int TransactionID { get; private set; }
+        public int TransactionID { get; set; }
 
         //khóa ngoại
 
         [ForeignKey("User")]
-        public int UserID { get; private set; }
-        public virtual User User { get; private set; }
+        public int UserID { get; set; }
+        public virtual User User { get; set; }
 
         [ForeignKey("OrderDetail")]
-        public int OrderDetailID { get; private set; }
-        public virtual OrderDetail OrderDetail { get; private set; }
+        public int OrderDetailID { get; set; }
+        public virtual OrderDetail OrderDetail { get; set; }
     }
 }

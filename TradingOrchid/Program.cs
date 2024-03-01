@@ -1,5 +1,6 @@
-using Microsoft.EntityFrameworkCore;
-using TradingOrchid.Model.Entity;
+using Application;
+using Infrastructure;
+using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,16 +11,16 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services
+    .AddSwagger()
+    .AddAuthen()
+    .AddCor()
+    .AddDatabase()
+    .AddServices()
+    .AddRepositories();
 
-//Setting Database Sql Server
-var connectionString = builder.Configuration.GetConnectionString("TradingOrchidSystem") ??
-    throw new InvalidOperationException("Connection string 'TradingOrchidSystem' not found.");
-
-builder.Services.AddDbContext<TradingOrchidContext>(options =>
-{
-    options.UseSqlServer(connectionString);
-});
-
+// Add AutoMapper
+builder.Services.AddAutoMapper(Assembly.Load("Application"));
 
 var app = builder.Build();
 
@@ -31,6 +32,12 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseCors("MyCors");
+
+app.UseExceptionHandler("/error");
+
+app.UseAuthentication();
 
 app.UseAuthorization();
 

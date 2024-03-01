@@ -1,10 +1,10 @@
-﻿using Application.Common.Dto;
-using Domain.Entities;
+﻿using Application.Common.Dto.Authen;
 
 namespace Application.Interfaces.Users
 {
     public interface IUserService
     {
-        Task<User> login(LoginDto loginDto);
+        Task<Token> Login(LoginDto loginDto);
+        Task Register(RegisterDto registerDto);
     }
 }

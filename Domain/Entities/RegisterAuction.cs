@@ -7,21 +7,21 @@ namespace Domain.Entities
     public class RegisterAuction
     {
         [Key]
-        public int BidID { get; private set; }
+        public int BidID { get; set; }
 
         [Required]
         [Range(1000.0, float.MaxValue, ErrorMessage = "Lỗi nhập, giá phải từ 1000 VND trở lên ")]
-        public float Price { get; private set; }
+        public float Price { get; set; }
 
         [Required]
         [Range(1000.0, float.MaxValue, ErrorMessage = "Lỗi nhập, giá phải từ 1000 VND trở lên ")]
-        public float Deposit { get; private set; }
+        public float Deposit { get; set; }
 
         //Khóa ngoại
         [ForeignKey("User")]
-        public int UserID { get; private set; }
-        public virtual User User { get; private set; }
+        public int UserID { get; set; }
+        public virtual User User { get; set; }
 
-        public virtual ICollection<Aution> Autions { get; private set; }
+        public virtual ICollection<Aution> Autions { get; set; }
     }
 }

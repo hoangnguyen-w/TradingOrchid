@@ -9,7 +9,7 @@ namespace Domain.Entities
         [Key]
         public int InformationID { get; set; }
 
-        [Required]
+        //[Required]
         public string InformationTitle { get; set; }
 
         public string Image { get; set; }

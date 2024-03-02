@@ -6,8 +6,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace TradingOrchid.Controllers
 {
-    [Route("api/[controller]")]
-    [ApiController]
+    /*[Route("api/[controller]")]
+    [ApiController]*/
     public class RoleController : Controller
     {
         private readonly IConfiguration _configuration;

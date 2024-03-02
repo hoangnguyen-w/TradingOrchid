@@ -1,83 +1,66 @@
 ﻿using Application.Common.Dto.Authen;
 using Application.Common.Dto.Exception;
+using Application.Common.Dto.Role;
 using Application.Interfaces.Users;
+using Domain.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.IdentityModel.Tokens;
-using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
-using System.Text;
 
 namespace TradingOrchid.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class UserController : ControllerBase
+    [Authorize(Roles = "Admin")]
+    public class UserController : Controller
     {
-        private readonly IConfiguration _configuration;
         private readonly IUserService userService;
         public UserController
-            (IConfiguration configuration, IUserService userService)
+            (IUserService userService)
         {
-            _configuration = configuration;
             this.userService = userService;
         }
 
-        [AllowAnonymous]
-        [HttpPost("login")]
-        public async Task<ActionResult<Token>> Login(LoginDto loginDto)
+        [HttpGet("GetAll")]
+        public async Task<ActionResult<List<User>>> GetAll()
         {
-            var user = await userService.Login(loginDto);
+            var list = await userService.GetAll();
 
-            user.UserToken = CreateToken(user, out DateTime from, out DateTime to);
-            user.TokenCreated = from;
-            user.TokenExpires = to;
-
-            var cookieOptions = new CookieOptions
+            if (list == null)
             {
-                HttpOnly = true,
-                Expires = to,
-            };
+                throw new MyException("Không tìm thấy.", 404);
+            }
 
-            Response.Cookies.Append("token", user.UserToken, cookieOptions);
-
-            return Ok(user);
+            return Ok(list);
         }
 
-        [AllowAnonymous]
-        [HttpPost("register")]
-        public async Task<ActionResult> Register(RegisterDto registerDto)
+
+        [HttpGet("Search/{search}")]
+        public async Task<ActionResult<User>> Search(string search)
+        {
+            var list = await userService.Search(search);
+            return Ok(list);
+        }
+
+        [HttpPost("Create")]
+        public async Task<ActionResult> Create(RegisterDto registerDto)
         {
             await userService.Register(registerDto);
             throw new MyException("Thành công.", 200);
         }
 
-        private string CreateToken(Token user, out DateTime from, out DateTime to)
+
+        [HttpPut("Update/{id}")]
+        public async Task<ActionResult> EditUser(int id)
         {
-                List<Claim> claims = new List<Claim>{
-                    new Claim("userId", user.UserId.ToString()),
-                    new Claim("userName", user.UserName is not null ? user.UserName : ""),
-                    new Claim("userEmail", user.Email is not null ? user.Email : ""),
-                    new Claim(ClaimTypes.Role, user.Role)};
+            await userService.Edit(id);
+            throw new MyException("Thành công.", 200);
+        }
 
-                var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]!));
-
-                var cred = new SigningCredentials(key, SecurityAlgorithms.HmacSha512Signature);
-
-                var token = new JwtSecurityToken(
-                    issuer: _configuration["Jwt:Key"],
-                    audience: _configuration["Jwt:Key"],
-                    claims: claims,
-                    expires: DateTime.Now.AddHours(5),
-                    signingCredentials: cred
-                );
-
-                from = token.ValidFrom;
-                to = token.ValidTo;
-
-                var jwt = new JwtSecurityTokenHandler().WriteToken(token);
-
-                return jwt;
+        [HttpDelete("Delete/{id}")]
+        public async Task<ActionResult> DeleteUser(int id)
+        {
+            await userService.Delete(id);
+            throw new MyException("Thành công.", 200);
         }
     }
 }

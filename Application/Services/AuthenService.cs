@@ -1,5 +1,6 @@
 ﻿using Application.Common.Dto.Authen;
 using Application.Common.Dto.Exception;
+using Application.Common.Dto.User;
 using Application.Interfaces.Users;
 using AutoMapper;
 using Domain.Entities;
@@ -8,15 +9,78 @@ using System.Text;
 
 namespace Application.Services
 {
-    public class UserService : IUserService
+    public class AuthenService : IUserService
     {
         private readonly IUserRepositoy userRepositoy;
         private readonly IMapper mapper;
-        public UserService
+        public AuthenService
             (IUserRepositoy userRepositoy, IMapper mapper)
         {
             this.userRepositoy = userRepositoy;
             this.mapper = mapper;
+        }
+
+
+        public async Task Delete(int id)
+        {
+            try
+            {
+                var user = await userRepositoy.FindIDToResult(id);
+
+                if (user == null)
+                {
+                    throw new MyException("Kiểm tra lại UserID.", 404);
+                }
+
+                await userRepositoy.Delete(user);
+            }
+            catch (Exception e)
+            {
+                throw new MyException(e.Message, 500);
+            }
+        }
+
+        public async Task Edit(int id)
+        {
+            try
+            {
+                var user = await userRepositoy.FindIDToResult(id);
+
+                if (user == null)
+                {
+                    throw new MyException("Kiểm tra lại UserID.", 404);
+                }
+                else
+                {
+                    if (user.Status)
+                    {
+                        user.Status = false;
+                        await userRepositoy.Update(user);
+                    }
+                    else
+                    {
+                        user.Status = true;
+                        await userRepositoy.Update(user);
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                throw new MyException(e.Message, 500);
+            }
+        }
+
+        public async Task<List<ViewInformationUserDTO>> GetAll()
+        {
+            try
+            {
+                var user = mapper.Map<List<ViewInformationUserDTO>>(await userRepositoy.GetAll());
+                return user;
+            }
+            catch (Exception e)
+            {
+                throw new MyException(e.Message, 500);
+            }
         }
 
         public async Task<Token> Login(LoginDto loginDto)
@@ -25,13 +89,13 @@ namespace Application.Services
             {
                 var user = await userRepositoy.GetUserByEmail(loginDto.Email);
                 var token = new Token();
-                if(user == null)
+                if (user == null)
                 {
                     throw new MyException("Tên đăng nhập không đúng hoặc không tồn tại.", 404);
                 }
                 else
                 {
-                    if(!VerifyPasswordHash
+                    if (!VerifyPasswordHash
                         (loginDto.Password, user.PasswordHash, user.PasswordSalt))
                     {
                         throw new MyException("Mật khẩu của bạn không đúng.", 404);
@@ -56,8 +120,10 @@ namespace Application.Services
                     (registerDto.Email) is not null)
                 {
                     throw new MyException("Email đã tồn tại.", 404);
-                }else if(!registerDto.PasswordConfirm
-                    .Equals(registerDto.PasswordConfirm)){
+                }
+                else if (!registerDto.PasswordConfirm
+                    .Equals(registerDto.PasswordConfirm))
+                {
                     throw new MyException("Mật khẩu không khớp.", 404);
                 }
 
@@ -71,6 +137,20 @@ namespace Application.Services
                 }));
 
                 await userRepositoy.Create(user);
+            }
+            catch (Exception e)
+            {
+                throw new MyException(e.Message, 500);
+            }
+        }
+
+        public async Task<List<ViewInformationUserDTO>> Search(string search)
+        {
+            try
+            {
+                //var user = await userRepositoy.Search(search);
+                var user = mapper.Map<List<ViewInformationUserDTO>>(await userRepositoy.Search(search));
+                return user;
             }
             catch (Exception e)
             {

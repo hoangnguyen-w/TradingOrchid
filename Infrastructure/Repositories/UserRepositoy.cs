@@ -1,7 +1,7 @@
 ﻿using Application.Interfaces.Users;
 using Domain.Entities;
 using Microsoft.EntityFrameworkCore;
-
+#nullable disable
 namespace Infrastructure.Repositories
 {
     public class UserRepositoy : IUserRepositoy

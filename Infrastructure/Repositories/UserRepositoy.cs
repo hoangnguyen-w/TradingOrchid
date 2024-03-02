@@ -19,7 +19,8 @@ namespace Infrastructure.Repositories
                 return await context.Users
                     .Include(u => u.Role)
                     .FirstOrDefaultAsync(u => u.Email.Equals(email));
-            }catch 
+            }
+            catch
             {
                 throw;
             }
@@ -30,6 +31,76 @@ namespace Infrastructure.Repositories
             try
             {
                 context.Users.Add(user);
+                await context.SaveChangesAsync();
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+
+        public async Task<List<User>> GetAll()
+        {
+            try
+            {
+                return await context.Users
+                    .Include(u => u.Role)
+                    .ToListAsync();
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+        public async Task<List<User>> Search(string search)
+        {
+            try
+            {
+                return await context.Users
+                    .Where(u => u.UserName.Trim().ToLower().Contains(search.Trim().ToLower()) ||
+                                u.Email.Trim().ToLower().Contains(search.Trim().ToLower()) ||
+                                u.Phone.Trim().ToLower().Contains(search.Trim().ToLower()))
+                    .ToListAsync();
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+
+        public async Task<User> FindIDToResult(int id)
+        {
+            try
+            {
+                return await context.Users.FindAsync(id);
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+        public async Task Update(User user)
+        {
+            try
+            {
+                context.Users.Update(user);
+                await context.SaveChangesAsync();
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+        public async Task Delete(User user)
+        {
+            try
+            {
+                context.Users.Remove(user);
                 await context.SaveChangesAsync();
             }
             catch

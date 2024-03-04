@@ -2,12 +2,14 @@
 using Application.Common.Dto.Role;
 using Application.Interfaces.Roles;
 using Domain.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace TradingOrchid.Controllers
 {
-    /*[Route("api/[controller]")]
-    [ApiController]*/
+    [Route("api/[controller]")]
+    [ApiController]
+    [Authorize(Roles = "Admin")]
     public class RoleController : Controller
     {
         private readonly IConfiguration _configuration;

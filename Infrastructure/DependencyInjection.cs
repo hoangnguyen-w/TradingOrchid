@@ -1,4 +1,5 @@
-﻿using Application.Interfaces.Roles;
+﻿using Application.Interfaces.Comments;
+using Application.Interfaces.Roles;
 using Application.Interfaces.Users;
 using Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
@@ -13,6 +14,7 @@ namespace Infrastructure
         {
             services.AddScoped<IUserRepositoy, UserRepositoy>();
             //services.AddScoped<IRoleRepository, RoleRepository>();
+            services.AddScoped<ICommentRepository, CommentRepository>();
 
             return services;
         }

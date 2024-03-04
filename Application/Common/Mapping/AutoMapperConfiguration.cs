@@ -28,9 +28,9 @@ namespace Application.Common.Mapping
                 .ForMember(des => des.Phone, obj => obj.MapFrom(src => src.Phone))
                 .ForMember(des => des.RoleName , obj => obj.MapFrom(src => src.Role.RoleName));
 
-            CreateMap<Comment, CreateCommentDTO>()
+            CreateMap<Comment, ViewCommentDTO>()
                 .ForMember(des => des.CommentMsg, obj => obj.MapFrom(src => src.CommentMsg))
-                .ForMember(des => des.UserID, obj => obj.MapFrom(src => src.User.UserName));
+                .ForMember(des => des.UserName, obj => obj.MapFrom(src => src.User.UserName));
 
             CreateMap<CreateCommentDTO, Comment>()
                 .ForMember(des => des.CommentMsg, obj => obj.MapFrom(src => src.CommentMsg))

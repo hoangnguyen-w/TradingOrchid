@@ -11,7 +11,7 @@ namespace Application.Interfaces.Comments
 {
     public interface ICommentService
     {
-        Task<List<CreateCommentDTO>> GetAll();
+        Task<List<ViewCommentDTO>> GetAll();
 
         Task Create(CreateCommentDTO createCommentDTO);
     }

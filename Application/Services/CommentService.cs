@@ -50,11 +50,11 @@ namespace Application.Services
             }
         }
 
-            public async Task<List<CreateCommentDTO>> GetAll()
+            public async Task<List<ViewCommentDTO>> GetAll()
         {
             try
             {
-                var cmt = mapper.Map<List<CreateCommentDTO>>(await commentRepository.GetAll()); 
+                var cmt = mapper.Map<List<ViewCommentDTO>>(await commentRepository.GetAll()); 
                 return cmt;
 
             }

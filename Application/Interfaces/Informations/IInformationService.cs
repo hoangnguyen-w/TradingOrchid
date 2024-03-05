@@ -1,5 +1,4 @@
 ﻿using Application.Common.Dto.Information;
-using Application.Common.Dto.Role;
 using Domain.Entities;
 using System;
 using System.Collections.Generic;
@@ -9,15 +8,13 @@ using System.Threading.Tasks;
 
 namespace Application.Interfaces.Informations
 {
-    public interface IInformationRepository
+    public interface IInformationService
     {
-        Task<List<Information>> GetAll();
+        Task<List<InformationViewDTO>> GetAll();
 
-        Task<List<Information>> GetByID(int id);
+        Task<List<InformationViewDTO>> GetByID(int id);
 
-        Task<Information> FindIDToResult(int id);
-
-        Task<List<Information>> Search(string search);
+        Task<List<InformationViewDTO>> Search(string search);
 
         Task CreateImage();
     }

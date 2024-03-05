@@ -1,18 +1,8 @@
-﻿using Application.Common.Dto.Authen;
-using Application.Common.Dto.Comment;
+﻿using Application.Common.Dto.Comment;
 using Application.Common.Dto.Exception;
-using Application.Common.Dto.User;
 using Application.Interfaces.Comments;
-using Application.Interfaces.Users;
 using AutoMapper;
 using Domain.Entities;
-using Microsoft.AspNetCore.Server.IIS.Core;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Application.Services
 {
@@ -50,11 +40,11 @@ namespace Application.Services
             }
         }
 
-            public async Task<List<ViewCommentDTO>> GetAll()
+        public async Task<List<ViewCommentDTO>> GetAll()
         {
             try
             {
-                var cmt = mapper.Map<List<ViewCommentDTO>>(await commentRepository.GetAll()); 
+                var cmt = mapper.Map<List<ViewCommentDTO>>(await commentRepository.GetAll());
                 return cmt;
 
             }

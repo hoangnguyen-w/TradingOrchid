@@ -1,5 +1,9 @@
-﻿using Application.Common.Dto.Information;
+﻿using Application.Common.Dto.Comment;
+using Application.Common.Dto.Exception;
+using Application.Common.Dto.Information;
+using Application.Interfaces.Comments;
 using Application.Interfaces.Informations;
+using AutoMapper;
 using Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -28,30 +32,48 @@ namespace Infrastructure.Repositories
             throw new NotImplementedException();
         }
 
-        public async Task<List<Information>> GetAll(InformationViewDTO informationViewDTO)
+        public async Task<List<Information>> GetAll()
         {
-            /*try
+            try
             {
-                *//*return await context.Informations.Join(context.Autions, i => i.AutionID, a => a.AutionID, (i, a) => new
-                {
-                });*//*
-                return informationViewDTO;
+                return await context.Informations
+                    .Include(c => c.Aution)
+                    .ToListAsync();
             }
             catch
             {
                 throw;
-            }*/
-            return await context.Informations.ToListAsync();
+            }
         }
 
-        public Task<List<Information>> GetByID(int id)
+        public async Task<List<Information>> GetByID(int id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                return await context.Informations
+                    .Where(r => r.InformationID == id)
+                    .ToListAsync();
+            }
+            catch
+            {
+                throw;
+            }
         }
 
-        public Task<List<Information>> Search(string search)
+        public async Task<List<Information>> Search(string search)
         {
-            throw new NotImplementedException();
+            try
+            {
+                return await context.Informations
+                    .Where(r => r.InformationTitle.Trim().ToLower().Contains(search.Trim().ToLower()) ||
+                                r.Aution.RegisterAuction.User.UserName.Trim().ToLower().Contains(search.Trim().ToLower()) ||
+                                r.Aution.AutionTitle.Trim().ToLower().Contains(search.Trim().ToLower()))
+                    .ToListAsync();
+            }
+            catch
+            {
+                throw;
+            }
         }
     }
 }

@@ -13,7 +13,7 @@ namespace Domain.Entities
 
         public string AutionDescription { get; set; }
 
-        public DateTime StartingBid { get; set; }
+        public float StartingBid { get; set; }
 
         [Required]
         [Range(1000.0, float.MaxValue, ErrorMessage = "Lỗi nhập, giá phải từ 1000 VND trở lên ")]

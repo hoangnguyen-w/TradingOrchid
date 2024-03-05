@@ -1,5 +1,6 @@
 ﻿using Application.Common.Dto.Authen;
 using Application.Common.Dto.Comment;
+using Application.Common.Dto.Information;
 using Application.Common.Dto.User;
 using AutoMapper;
 using Domain.Entities;
@@ -14,6 +15,7 @@ namespace Application.Common.Mapping
             CreateMap<User, Token>()
                 .ForMember(des => des.UserName, obj => obj.MapFrom(src => src.UserName))
                 .ForMember(des => des.Role, obj => obj.MapFrom(src => src.Role.RoleName));
+
             CreateMap<RegisterDto, User>()
                 .ForMember(des => des.PasswordHash, obj => obj.Ignore())
                 .ForMember(des => des.PasswordSalt, obj => obj.Ignore())
@@ -39,6 +41,12 @@ namespace Application.Common.Mapping
                 .ForMember(des => des.IsCheckBool, obj => obj.MapFrom(src => true))
                 .ForMember(des => des.CreateDate, obj => obj.MapFrom(src => DateTime.Now));
 
+            CreateMap<Information, InformationViewDTO>()
+                .ForMember(des => des.Image, obj => obj.MapFrom(src => src.Image))
+                .ForMember(des => des.InformationTitle, obj => obj.MapFrom(src => src.InformationTitle))
+                .ForMember(des => des.Title, obj => obj.MapFrom(src => src.Aution.AutionTitle))
+                .ForMember(des => des.Bid, obj => obj.MapFrom(src => src.Aution.StartingBid))
+                .ForMember(des => des.UserName, obj => obj.MapFrom(src => src.Aution.RegisterAuction.User.UserName));
         }
     }
 }

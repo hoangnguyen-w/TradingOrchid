@@ -10,7 +10,7 @@ namespace Application.Common.Dto.Information
     {
         public string Image {  get; set; }
 
-        public string Comment { get; set; }
+        public string InformationTitle { get; set; }
 
         public string Title { get; set; }
 

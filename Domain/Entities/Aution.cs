@@ -1,5 +1,4 @@
-﻿#nullable disable
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Domain.Entities
@@ -9,14 +8,12 @@ namespace Domain.Entities
         [Key]
         public int AutionID { get; set; }
 
-        public string AutionTitle { get; set; }
+        public string? AutionTitle { get; set; }
 
-        public string AutionDescription { get; set; }
+        public string? AutionDescription { get; set; }
 
-        public DateTime StartingBid { get; set; }
+        public float StartingBid { get; set; }
 
-        [Required]
-        [Range(1000.0, float.MaxValue, ErrorMessage = "Lỗi nhập, giá phải từ 1000 VND trở lên ")]
         public float MaxBid { get; set; }
 
         public DateTime DateOpened { get; set; }
@@ -27,7 +24,7 @@ namespace Domain.Entities
 
         //Khóa ngoại
         [ForeignKey("RegisterAuction")]
-        public int BidID { get; set; }
-        public virtual RegisterAuction RegisterAuction { get; set; }
+        public int? BidID { get; set; }
+        public virtual RegisterAuction? RegisterAuction { get; set; }
     }
 }

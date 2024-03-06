@@ -25,7 +25,7 @@ namespace Infrastructure.Repositories
             }
         }
 
-        public async Task Create(User user)
+        public async Task Insert(User user)
         {
             try
             {

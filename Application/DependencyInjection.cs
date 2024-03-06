@@ -1,4 +1,5 @@
-﻿using Application.Interfaces.Users;
+﻿using Application.Interfaces.Autions;
+using Application.Interfaces.Users;
 using Application.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.Configuration;
@@ -15,6 +16,7 @@ namespace Application
     {
         public static IServiceCollection AddServices(this IServiceCollection services)
         {
+            services.AddScoped<IAuctionService, AuctionService>();
             services.AddScoped<IUserService, UserService>();
 
             return services;

@@ -70,7 +70,7 @@ namespace Application.Services
                     des.PasswordSalt = password_salt;
                 }));
 
-                await userRepositoy.Create(user);
+                await userRepositoy.Insert(user);
             }
             catch (Exception e)
             {

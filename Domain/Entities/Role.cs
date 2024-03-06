@@ -1,5 +1,4 @@
-﻿#nullable disable
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace Domain.Entities
 {
@@ -9,9 +8,9 @@ namespace Domain.Entities
         public int RoleID { get; set; }
 
         [Required]
-        public string RoleName { get; set; }
+        public string? RoleName { get; set; }
 
-        public virtual ICollection<User> Users { get; set; }
+        public virtual ICollection<User>? Users { get; set; }
 
     }
 }

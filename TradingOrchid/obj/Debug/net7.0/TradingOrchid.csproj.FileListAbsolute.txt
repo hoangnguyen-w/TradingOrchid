@@ -159,8 +159,6 @@ D:\CleanArchitecture\TradingOrchid\obj\Debug\net7.0\TradingOrchid.pdb
 D:\CleanArchitecture\TradingOrchid\obj\Debug\net7.0\TradingOrchid.genruntimeconfig.cache
 D:\CleanArchitecture\TradingOrchid\obj\Debug\net7.0\ref\TradingOrchid.dll
 D:\CleanArchitecture\TradingOrchid\bin\Debug\net7.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
-D:\CleanArchitecture\TradingOrchid\bin\Debug\net7.0\TradingOrchid.xml
-D:\CleanArchitecture\TradingOrchid\obj\Debug\net7.0\TradingOrchid.xml
 D:\CleanArchitecture\TradingOrchid\bin\Debug\net7.0\Humanizer.dll
 D:\CleanArchitecture\TradingOrchid\bin\Debug\net7.0\Microsoft.EntityFrameworkCore.Design.dll
 D:\CleanArchitecture\TradingOrchid\bin\Debug\net7.0\Mono.TextTemplating.dll

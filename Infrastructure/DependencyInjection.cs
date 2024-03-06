@@ -1,4 +1,6 @@
-﻿using Application.Interfaces.Users;
+﻿using Application.Interfaces.Autions;
+using Application.Interfaces.Informations;
+using Application.Interfaces.Users;
 using Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -10,6 +12,8 @@ namespace Infrastructure
     {
         public static IServiceCollection AddRepositories(this IServiceCollection services)
         {
+            services.AddScoped<IInformationRepository, InformationRepository>();
+            services.AddScoped<IAuctionRepository, AutionRepository>();
             services.AddScoped<IUserRepositoy, UserRepositoy>();
 
             return services;

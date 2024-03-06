@@ -1,5 +1,4 @@
-﻿#nullable disable
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Domain.Entities
@@ -34,18 +33,20 @@ namespace Domain.Entities
 
         //khóa ngoại
         [ForeignKey("Role")]
-        public int RoleID { get; set; }
-        public virtual Role Role { get; set; }
+        public int? RoleID { get; set; }
+        public virtual Role? Role { get; set; }
 
 
         //[JsonIgnore]
-        public virtual ICollection<Order> Orders { get; set; }  
+        public virtual ICollection<Order>? Orders { get; set; }  
 
-        public virtual ICollection<RegisterAuction> RegisterAuctions { get; set; }      
+        public virtual ICollection<RegisterAuction>? RegisterAuctions { get; set; }      
 
-        public virtual ICollection<Transaction> Transactions { get; set; }
+        public virtual ICollection<Transaction>? Transactions { get; set; }
 
-        public virtual ICollection<Comment> Comments { get; set; }
+        public virtual ICollection<Comment>? Comments { get; set; }
+
+        public virtual ICollection<Information>? Informations { get; set; }
 
 
         //JWT

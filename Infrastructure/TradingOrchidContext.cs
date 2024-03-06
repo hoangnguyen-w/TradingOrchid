@@ -43,6 +43,11 @@ namespace Infrastructure
             .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<User>()
+           .HasMany(c => c.Informations)
+           .WithOne(c => c.User)
+           .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<User>()
             .HasMany(c => c.Comments)
             .WithOne(c => c.User)
             .OnDelete(DeleteBehavior.Restrict);

@@ -17,7 +17,7 @@ namespace Infrastructure.Migrations
                 {
                     OrchidID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    OrchidName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    OrchidName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Characteristics = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     UnitPrice = table.Column<float>(type: "real", nullable: false),
                     Quantity = table.Column<int>(type: "int", nullable: false),
@@ -47,14 +47,14 @@ namespace Infrastructure.Migrations
                 {
                     UserID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    UserName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    UserName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     PasswordHash = table.Column<byte[]>(type: "varbinary(1024)", maxLength: 1024, nullable: false),
                     PasswordSalt = table.Column<byte[]>(type: "varbinary(1024)", maxLength: 1024, nullable: false),
                     WalletBalance = table.Column<float>(type: "real", nullable: false),
-                    Phone = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Phone = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Status = table.Column<bool>(type: "bit", nullable: false),
-                    RoleID = table.Column<int>(type: "int", nullable: false),
+                    RoleID = table.Column<int>(type: "int", nullable: true),
                     TokenExpires = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
@@ -64,8 +64,7 @@ namespace Infrastructure.Migrations
                         name: "FK_Users_Roles_RoleID",
                         column: x => x.RoleID,
                         principalTable: "Roles",
-                        principalColumn: "RoleID",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "RoleID");
                 });
 
             migrationBuilder.CreateTable(
@@ -76,7 +75,7 @@ namespace Infrastructure.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Price = table.Column<float>(type: "real", nullable: false),
                     Deposit = table.Column<float>(type: "real", nullable: false),
-                    UserID = table.Column<int>(type: "int", nullable: false)
+                    UserID = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -97,12 +96,12 @@ namespace Infrastructure.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     AutionTitle = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     AutionDescription = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    StartingBid = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    StartingBid = table.Column<float>(type: "real", nullable: false),
                     MaxBid = table.Column<float>(type: "real", nullable: false),
                     DateOpened = table.Column<DateTime>(type: "datetime2", nullable: false),
                     DateClosed = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Status = table.Column<int>(type: "int", nullable: false),
-                    BidID = table.Column<int>(type: "int", nullable: false)
+                    BidID = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -111,8 +110,7 @@ namespace Infrastructure.Migrations
                         name: "FK_Autions_RegisterAuctions_BidID",
                         column: x => x.BidID,
                         principalTable: "RegisterAuctions",
-                        principalColumn: "BidID",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "BidID");
                 });
 
             migrationBuilder.CreateTable(
@@ -121,12 +119,12 @@ namespace Infrastructure.Migrations
                 {
                     InformationID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    InformationTitle = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Image = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Status = table.Column<int>(type: "int", nullable: false),
                     InformationCreateDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    AutionID = table.Column<int>(type: "int", nullable: false),
-                    OrchidID = table.Column<int>(type: "int", nullable: false)
+                    AutionID = table.Column<int>(type: "int", nullable: true),
+                    OrchidID = table.Column<int>(type: "int", nullable: true),
+                    UserID = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -135,14 +133,18 @@ namespace Infrastructure.Migrations
                         name: "FK_Informations_Autions_AutionID",
                         column: x => x.AutionID,
                         principalTable: "Autions",
-                        principalColumn: "AutionID",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "AutionID");
                     table.ForeignKey(
                         name: "FK_Informations_OrchidProducts_OrchidID",
                         column: x => x.OrchidID,
                         principalTable: "OrchidProducts",
-                        principalColumn: "OrchidID",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "OrchidID");
+                    table.ForeignKey(
+                        name: "FK_Informations_Users_UserID",
+                        column: x => x.UserID,
+                        principalTable: "Users",
+                        principalColumn: "UserID",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -155,8 +157,8 @@ namespace Infrastructure.Migrations
                     OrderDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Status = table.Column<int>(type: "int", nullable: false),
                     Total = table.Column<float>(type: "real", nullable: false),
-                    UserID = table.Column<int>(type: "int", nullable: false),
-                    AutionID = table.Column<int>(type: "int", nullable: false)
+                    UserID = table.Column<int>(type: "int", nullable: true),
+                    AutionID = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -165,8 +167,7 @@ namespace Infrastructure.Migrations
                         name: "FK_Orders_Autions_AutionID",
                         column: x => x.AutionID,
                         principalTable: "Autions",
-                        principalColumn: "AutionID",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "AutionID");
                     table.ForeignKey(
                         name: "FK_Orders_Users_UserID",
                         column: x => x.UserID,
@@ -181,11 +182,11 @@ namespace Infrastructure.Migrations
                 {
                     CommentID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    CommentMsg = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CommentMsg = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CreateDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     IsCheckBool = table.Column<bool>(type: "bit", nullable: false),
-                    UserID = table.Column<int>(type: "int", nullable: false),
-                    InformationID = table.Column<int>(type: "int", nullable: false)
+                    UserID = table.Column<int>(type: "int", nullable: true),
+                    InformationID = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -194,8 +195,7 @@ namespace Infrastructure.Migrations
                         name: "FK_Comments_Informations_InformationID",
                         column: x => x.InformationID,
                         principalTable: "Informations",
-                        principalColumn: "InformationID",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "InformationID");
                     table.ForeignKey(
                         name: "FK_Comments_Users_UserID",
                         column: x => x.UserID,
@@ -212,8 +212,8 @@ namespace Infrastructure.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     UnitPrice = table.Column<float>(type: "real", nullable: false),
                     Quanlity = table.Column<int>(type: "int", nullable: false),
-                    OrderID = table.Column<int>(type: "int", nullable: false),
-                    OrchidID = table.Column<int>(type: "int", nullable: false)
+                    OrderID = table.Column<int>(type: "int", nullable: true),
+                    OrchidID = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -222,14 +222,12 @@ namespace Infrastructure.Migrations
                         name: "FK_OrderDetails_OrchidProducts_OrchidID",
                         column: x => x.OrchidID,
                         principalTable: "OrchidProducts",
-                        principalColumn: "OrchidID",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "OrchidID");
                     table.ForeignKey(
                         name: "FK_OrderDetails_Orders_OrderID",
                         column: x => x.OrderID,
                         principalTable: "Orders",
-                        principalColumn: "OrderID",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "OrderID");
                 });
 
             migrationBuilder.CreateTable(
@@ -238,8 +236,8 @@ namespace Infrastructure.Migrations
                 {
                     TransactionID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    UserID = table.Column<int>(type: "int", nullable: false),
-                    OrderDetailID = table.Column<int>(type: "int", nullable: false)
+                    UserID = table.Column<int>(type: "int", nullable: true),
+                    OrderDetailID = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -248,8 +246,7 @@ namespace Infrastructure.Migrations
                         name: "FK_Transactions_OrderDetails_OrderDetailID",
                         column: x => x.OrderDetailID,
                         principalTable: "OrderDetails",
-                        principalColumn: "OrderDetailID",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "OrderDetailID");
                     table.ForeignKey(
                         name: "FK_Transactions_Users_UserID",
                         column: x => x.UserID,
@@ -282,6 +279,11 @@ namespace Infrastructure.Migrations
                 name: "IX_Informations_OrchidID",
                 table: "Informations",
                 column: "OrchidID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Informations_UserID",
+                table: "Informations",
+                column: "UserID");
 
             migrationBuilder.CreateIndex(
                 name: "IX_OrderDetails_OrchidID",

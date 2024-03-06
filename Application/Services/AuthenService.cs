@@ -1,5 +1,6 @@
 ﻿using Application.Common.Dto.Authen;
 using Application.Common.Dto.Exception;
+using Application.Common.Dto.Page;
 using Application.Common.Dto.User;
 using Application.Interfaces.Users;
 using AutoMapper;
@@ -70,11 +71,12 @@ namespace Application.Services
             }
         }
 
-        public async Task<List<ViewInformationUserDTO>> GetAll()
+        public async Task<List<ViewInformationUserDTO>> GetAll(PageDto page)
         {
             try
             {
-                var user = mapper.Map<List<ViewInformationUserDTO>>(await userRepositoy.GetAll());
+                var user = mapper.Map<List<ViewInformationUserDTO>>
+                    (await userRepositoy.GetAll(page));
                 return user;
             }
             catch (Exception e)

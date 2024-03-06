@@ -1,5 +1,4 @@
-﻿#nullable disable
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace Domain.Entities
 {
@@ -8,12 +7,10 @@ namespace Domain.Entities
         [Key]
         public int OrchidID { get; set; }
 
-        [Required]
-        public string OrchidName { get; set; }
+        public string? OrchidName { get; set; }
 
-        public string Characteristics { get; set; }
+        public string? Characteristics { get; set; }
 
-        [Required]
         [Range(1000.0, float.MaxValue, ErrorMessage = "Lỗi nhập, giá phải từ 1000 VND trở lên ")]
         public float UnitPrice { get; set; }
 

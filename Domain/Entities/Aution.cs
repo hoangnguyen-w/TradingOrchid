@@ -1,5 +1,4 @@
-﻿#nullable disable
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Domain.Entities
@@ -9,9 +8,9 @@ namespace Domain.Entities
         [Key]
         public int AutionID { get; set; }
 
-        public string AutionTitle { get; set; }
+        public string? AutionTitle { get; set; }
 
-        public string AutionDescription { get; set; }
+        public string? AutionDescription { get; set; }
 
         public float StartingBid { get; set; }
 
@@ -25,9 +24,6 @@ namespace Domain.Entities
 
         public int Status { get; set; }
 
-        //Khóa ngoại
-        [ForeignKey("RegisterAuction")]
-        public int BidID { get; set; }
-        public virtual RegisterAuction RegisterAuction { get; set; }
+        public virtual ICollection<RegisterAuction>? RegisterAuctions { get; set; }
     }
 }

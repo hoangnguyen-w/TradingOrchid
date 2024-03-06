@@ -1,6 +1,6 @@
 ﻿using Application.Common.Dto.Authen;
 using Application.Common.Dto.Exception;
-using Application.Common.Dto.Role;
+using Application.Common.Dto.Page;
 using Application.Interfaces.Users;
 using Domain.Entities;
 using Microsoft.AspNetCore.Authorization;
@@ -21,9 +21,9 @@ namespace TradingOrchid.Controllers
         }
 
         [HttpGet("GetAll")]
-        public async Task<ActionResult<List<User>>> GetAll()
+        public async Task<ActionResult<List<User>>> GetAll(PageDto page)
         {
-            var list = await userService.GetAll();
+            var list = await userService.GetAll(page);
 
             if (list == null)
             {

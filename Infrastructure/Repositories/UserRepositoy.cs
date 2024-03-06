@@ -1,4 +1,6 @@
-﻿using Application.Interfaces.Users;
+﻿using Application.Common.Dto.Page;
+using Application.Common.Paging;
+using Application.Interfaces.Users;
 using Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 #nullable disable
@@ -40,13 +42,14 @@ namespace Infrastructure.Repositories
         }
 
 
-        public async Task<List<User>> GetAll()
+        public async Task<List<User>> GetAll(PageDto page)
         {
             try
             {
-                return await context.Users
-                    .Include(u => u.Role)
-                    .ToListAsync();
+                var query = context.Users.AsQueryable();
+
+                return await PagingConfiguration<User>
+                    .Get(query.Include(u => u.Role), page);
             }
             catch
             {

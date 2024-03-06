@@ -1,4 +1,5 @@
-﻿using Application.Common.Dto.Role;
+﻿using Application.Common.Dto.Page;
+using Application.Common.Dto.Role;
 using Application.Common.Dto.User;
 using Domain.Entities;
 
@@ -8,7 +9,7 @@ namespace Application.Interfaces.Users
     {
         Task<User> GetUserByEmail(string email);
 
-        Task<List<User>> GetAll();
+        Task<List<User>> GetAll(PageDto page);
 
         Task<List<User>> Search(string search);
 

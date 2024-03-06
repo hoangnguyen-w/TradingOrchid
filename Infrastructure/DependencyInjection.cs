@@ -1,4 +1,6 @@
-﻿using Application.Interfaces.Comments;
+﻿using Application.Interfaces.Auctions;
+using Application.Interfaces.Comments;
+using Application.Interfaces.Informations;
 using Application.Interfaces.Roles;
 using Application.Interfaces.Users;
 using Infrastructure.Repositories;
@@ -12,6 +14,8 @@ namespace Infrastructure
     {
         public static IServiceCollection AddRepositories(this IServiceCollection services)
         {
+            services.AddScoped<IInformationRepository, InformationRepository>();
+            services.AddScoped<IAuctionRepository, AuctionRepostitory>();
             services.AddScoped<IUserRepositoy, UserRepositoy>();
             //services.AddScoped<IRoleRepository, RoleRepository>();
             services.AddScoped<ICommentRepository, CommentRepository>();

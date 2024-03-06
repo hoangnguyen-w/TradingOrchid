@@ -1,6 +1,4 @@
-﻿using Application;
-using System.ComponentModel.DataAnnotations;
-using System.Text.Json.Serialization;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace Application.Common.Dto.User
 {

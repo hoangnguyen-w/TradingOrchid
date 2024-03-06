@@ -1,16 +1,8 @@
-﻿using Application.Common.Dto.Comment;
-using Application.Common.Dto.Exception;
-using Application.Common.Dto.Information;
-using Application.Interfaces.Comments;
+﻿using Application.Common.Dto.Page;
+using Application.Common.Paging;
 using Application.Interfaces.Informations;
-using AutoMapper;
 using Domain.Entities;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Infrastructure.Repositories
 {
@@ -32,13 +24,27 @@ namespace Infrastructure.Repositories
             throw new NotImplementedException();
         }
 
-        public async Task<List<Information>> GetAll()
+        public async Task Insert(Information information)
         {
             try
             {
-                return await context.Informations
-                    .Include(c => c.Aution)
-                    .ToListAsync();
+                context.Informations.Add(information);
+                await context.SaveChangesAsync();
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+        public async Task<List<Information>> GetAll(PageDto page)
+        {
+            try
+            {
+                var query = context.Informations.AsQueryable();
+
+                return await PagingConfiguration<Information>
+                    .Get(query.Include(c => c.Aution), page);
             }
             catch
             {
@@ -66,7 +72,6 @@ namespace Infrastructure.Repositories
             {
                 return await context.Informations
                     .Where(r => r.InformationTitle.Trim().ToLower().Contains(search.Trim().ToLower()) ||
-                                r.Aution.RegisterAuction.User.UserName.Trim().ToLower().Contains(search.Trim().ToLower()) ||
                                 r.Aution.AutionTitle.Trim().ToLower().Contains(search.Trim().ToLower()))
                     .ToListAsync();
             }

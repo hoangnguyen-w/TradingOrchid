@@ -1,5 +1,6 @@
 ﻿using Application.Common.Dto.Comment;
 using Application.Common.Dto.Exception;
+using Application.Common.Dto.Page;
 using Application.Interfaces.Comments;
 using AutoMapper;
 using Domain.Entities;
@@ -40,11 +41,11 @@ namespace Application.Services
             }
         }
 
-        public async Task<List<ViewCommentDTO>> GetAll()
+        public async Task<List<ViewCommentDTO>> GetAll(PageDto page)
         {
             try
             {
-                var cmt = mapper.Map<List<ViewCommentDTO>>(await commentRepository.GetAll());
+                var cmt = mapper.Map<List<ViewCommentDTO>>(await commentRepository.GetAll(page));
                 return cmt;
 
             }

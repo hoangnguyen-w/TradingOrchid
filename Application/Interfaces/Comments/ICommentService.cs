@@ -1,4 +1,5 @@
 ﻿using Application.Common.Dto.Comment;
+using Application.Common.Dto.Page;
 using Domain.Entities;
 using System;
 using System.Collections.Generic;
@@ -11,7 +12,7 @@ namespace Application.Interfaces.Comments
 {
     public interface ICommentService
     {
-        Task<List<ViewCommentDTO>> GetAll();
+        Task<List<ViewCommentDTO>> GetAll(PageDto page);
 
         Task Create(CreateCommentDTO createCommentDTO);
     }

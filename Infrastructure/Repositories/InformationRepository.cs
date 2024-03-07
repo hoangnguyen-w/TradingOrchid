@@ -58,6 +58,7 @@ namespace Infrastructure.Repositories
             {
                 return await context.Informations
                     .Where(r => r.InformationID == id)
+                    .Include(c => c.Aution.RegisterAuction.User)
                     .ToListAsync();
             }
             catch
@@ -73,6 +74,7 @@ namespace Infrastructure.Repositories
                 return await context.Informations
                     .Where(r => r.InformationTitle.Trim().ToLower().Contains(search.Trim().ToLower()) ||
                                 r.Aution.AutionTitle.Trim().ToLower().Contains(search.Trim().ToLower()))
+                    .Include(c => c.Aution)
                     .ToListAsync();
             }
             catch

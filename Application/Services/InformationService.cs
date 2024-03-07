@@ -1,18 +1,8 @@
-﻿using Application.Common.Dto.Comment;
-using Application.Common.Dto.Exception;
+﻿using Application.Common.Dto.Exception;
 using Application.Common.Dto.Information;
 using Application.Common.Dto.Page;
-using Application.Common.Dto.User;
-using Application.Interfaces.Comments;
 using Application.Interfaces.Informations;
-using Application.Interfaces.Users;
 using AutoMapper;
-using Microsoft.AspNetCore.Mvc.RazorPages;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Application.Services
 {

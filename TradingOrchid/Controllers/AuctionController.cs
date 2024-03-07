@@ -6,7 +6,8 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace TradingOrchid.Controllers
 {
-    [Authorize(Roles = "Staff")]
+    [Route("trading-orchid/[controller]")]
+    [Authorize(Roles = "Customer")]
     public class AuctionController : Controller
     {
         private readonly IAuctionService auctionService;

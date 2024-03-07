@@ -2,9 +2,11 @@
 using Microsoft.AspNetCore.Mvc;
 using Application.Interfaces.Auctions;
 using Application.Common.Dto.Auction;
+using Microsoft.AspNetCore.Authorization;
 
 namespace TradingOrchid.Controllers
 {
+    [Authorize(Roles = "Staff")]
     public class AuctionController : Controller
     {
         private readonly IAuctionService auctionService;
@@ -13,7 +15,6 @@ namespace TradingOrchid.Controllers
             this.auctionService = auctionService;
         }
 
-        //[Authorize(Roles = "Staff")]
         [HttpPost("create-auction")]
         public async Task<IActionResult> RegisterAuction([FromBody] CreateAuctionDto requset)
         {

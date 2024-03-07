@@ -8,6 +8,7 @@ namespace Application.Interfaces.Informations
         Task<List<Information>> GetAll(PageDto page);
 
         Task Insert(Information information);
+
         Task<List<Information>> GetByID(int id);
 
         Task<Information> FindIDToResult(int id);

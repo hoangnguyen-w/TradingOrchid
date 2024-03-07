@@ -47,7 +47,8 @@ namespace Application.Common.Mapping
                 .ForMember(des => des.Image, obj => obj.MapFrom(src => src.Image))
                 .ForMember(des => des.InformationTitle, obj => obj.MapFrom(src => src.InformationTitle))
                 .ForMember(des => des.Title, obj => obj.MapFrom(src => src.Aution.AutionTitle))
-                .ForMember(des => des.Bid, obj => obj.MapFrom(src => src.Aution.StartingBid));
+                .ForMember(des => des.Bid, obj => obj.MapFrom(src => src.Aution.StartingBid))
+                .ForMember(des => des.UserName, obj => obj.MapFrom(src => src.Aution.RegisterAuction.User.UserName));
 
             CreateMap<CreateAuctionDto, Aution>()
                 .ForMember(des => des.AutionTitle, obj => obj.MapFrom(src => src.Title))

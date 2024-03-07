@@ -1,5 +1,6 @@
 ﻿using Application.Common.Dto.Comment;
 using Application.Common.Dto.Exception;
+using Application.Common.Dto.Page;
 using Application.Interfaces.Comments;
 using Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
@@ -19,9 +20,9 @@ namespace TradingOrchid.Controllers
         }
 
         [HttpGet("GetAll")]
-        public async Task<ActionResult<List<Comment>>> GetAll()
+        public async Task<ActionResult<List<Comment>>> GetAll(PageDto page)
         {
-            var list = await commentService.GetAll();
+            var list = await commentService.GetAll(page);
 
             if (list == null)
             {

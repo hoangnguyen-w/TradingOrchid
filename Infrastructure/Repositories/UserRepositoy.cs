@@ -65,6 +65,7 @@ namespace Infrastructure.Repositories
                     .Where(u => u.UserName.Trim().ToLower().Contains(search.Trim().ToLower()) ||
                                 u.Email.Trim().ToLower().Contains(search.Trim().ToLower()) ||
                                 u.Phone.Trim().ToLower().Contains(search.Trim().ToLower()))
+                    .Include(u => u.Role)
                     .ToListAsync();
             }
             catch

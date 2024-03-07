@@ -57,6 +57,11 @@ namespace Infrastructure
             .WithOne(c => c.User)
             .OnDelete(DeleteBehavior.Restrict);
 
+            modelBuilder.Entity<User>()
+            .HasMany(c => c.Informations)
+            .WithOne(c => c.User)
+            .OnDelete(DeleteBehavior.Restrict);
+
             //Hàm này để ép dữ liệu mặc định
             this.SeedRoles(modelBuilder);
             this.SeedAccounts(modelBuilder);

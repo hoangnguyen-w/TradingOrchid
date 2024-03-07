@@ -18,6 +18,12 @@ namespace Domain.Entities
         public DateTime InformationCreateDate { get; set; }
 
         //Khóa ngoại
+
+        [ForeignKey("User")]
+        public int? UserID { get; set; }
+        public virtual User? User { get; set; }
+
+
         [ForeignKey("Aution")]
         public int? AutionID { get; set; }
         public virtual Aution? Aution { get; set; }

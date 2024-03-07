@@ -22,7 +22,7 @@ namespace Application.Common.Mapping
                 .ForMember(des => des.PasswordHash, obj => obj.Ignore())
                 .ForMember(des => des.PasswordSalt, obj => obj.Ignore())
                 .ForMember(des => des.Status, obj => obj.MapFrom(src => true))
-                .ForMember(des => des.RoleID, obj => obj.MapFrom(src => 1))
+                .ForMember(des => des.RoleID, obj => obj.MapFrom(src => 3))
                 .ForMember(des => des.WalletBalance, obj => obj.MapFrom(src => 0));
 
             CreateMap<User, ViewInformationUserDTO> ()
@@ -48,7 +48,7 @@ namespace Application.Common.Mapping
                 .ForMember(des => des.InformationTitle, obj => obj.MapFrom(src => src.InformationTitle))
                 .ForMember(des => des.Title, obj => obj.MapFrom(src => src.Aution.AutionTitle))
                 .ForMember(des => des.Bid, obj => obj.MapFrom(src => src.Aution.StartingBid))
-                .ForMember(des => des.UserName, obj => obj.MapFrom(src => src.Aution.RegisterAuction.User.UserName));
+                .ForMember(des => des.UserName, obj => obj.MapFrom(src => src.User.UserName));
 
             CreateMap<CreateAuctionDto, Aution>()
                 .ForMember(des => des.AutionTitle, obj => obj.MapFrom(src => src.Title))

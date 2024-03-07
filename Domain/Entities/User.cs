@@ -38,6 +38,8 @@ namespace Domain.Entities
 
 
         //[JsonIgnore]
+        public virtual ICollection<Information>? Informations { get; set; }
+
         public virtual ICollection<Order>? Orders { get; set; }  
 
         public virtual ICollection<RegisterAuction>? RegisterAuctions { get; set; }      

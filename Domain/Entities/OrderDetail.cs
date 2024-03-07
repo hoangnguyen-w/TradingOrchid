@@ -1,5 +1,4 @@
-﻿#nullable disable
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Domain.Entities
@@ -20,11 +19,11 @@ namespace Domain.Entities
 
         //Khóa ngoại
         [ForeignKey("Order")]
-        public int OrderID { get; set; }
-        public virtual Order Order { get; set; }
+        public int? OrderID { get; set; }
+        public virtual Order? Order { get; set; }
 
         [ForeignKey("OrchidProduct")]
-        public int OrchidID { get; set; }
-        public virtual OrchidProduct OrchidProduct { get; set; }
+        public int? OrchidID { get; set; }
+        public virtual OrchidProduct? OrchidProduct { get; set; }
     }
 }

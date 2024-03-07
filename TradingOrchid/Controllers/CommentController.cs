@@ -1,10 +1,7 @@
-﻿using Application.Common.Dto.Authen;
-using Application.Common.Dto.Comment;
+﻿using Application.Common.Dto.Comment;
 using Application.Common.Dto.Exception;
 using Application.Interfaces.Comments;
-using Application.Interfaces.Users;
 using Domain.Entities;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace TradingOrchid.Controllers

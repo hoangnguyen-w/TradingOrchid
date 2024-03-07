@@ -1,18 +1,13 @@
-﻿using Application.Common.Dto.Information;
-using Application.Common.Dto.Role;
+﻿using Application.Common.Dto.Page;
 using Domain.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Application.Interfaces.Informations
 {
     public interface IInformationRepository
     {
-        Task<List<Information>> GetAll();
+        Task<List<Information>> GetAll(PageDto page);
 
+        Task Insert(Information information);
         Task<List<Information>> GetByID(int id);
 
         Task<Information> FindIDToResult(int id);

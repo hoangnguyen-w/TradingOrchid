@@ -1,9 +1,11 @@
-﻿using Application.Common.Dto.Authen;
+﻿using Application.Common.Dto.Auction;
+using Application.Common.Dto.Authen;
 using Application.Common.Dto.Comment;
 using Application.Common.Dto.Information;
 using Application.Common.Dto.User;
 using AutoMapper;
 using Domain.Entities;
+using System.Globalization;
 
 namespace Application.Common.Mapping
 {
@@ -45,8 +47,21 @@ namespace Application.Common.Mapping
                 .ForMember(des => des.Image, obj => obj.MapFrom(src => src.Image))
                 .ForMember(des => des.InformationTitle, obj => obj.MapFrom(src => src.InformationTitle))
                 .ForMember(des => des.Title, obj => obj.MapFrom(src => src.Aution.AutionTitle))
-                .ForMember(des => des.Bid, obj => obj.MapFrom(src => src.Aution.StartingBid))
-                .ForMember(des => des.UserName, obj => obj.MapFrom(src => src.Aution.RegisterAuction.User.UserName));
+                .ForMember(des => des.Bid, obj => obj.MapFrom(src => src.Aution.StartingBid));
+
+            CreateMap<CreateAuctionDto, Aution>()
+                .ForMember(des => des.AutionTitle, obj => obj.MapFrom(src => src.Title))
+                .ForMember(des => des.AutionDescription, obj => obj.MapFrom(src => src.Description))
+                .ForMember(des => des.Status, obj => obj.MapFrom(src => 1))
+                .ForMember(des => des.DateOpened, obj => obj.MapFrom(src =>
+                DateTime.ParseExact(src.DateOpen, "dd/MM/yyyy", CultureInfo.InvariantCulture)))
+                .ForMember(des => des.DateClosed, obj => obj.MapFrom(src =>
+                DateTime.ParseExact(src.DateClose, "dd/MM/yyyy", CultureInfo.InvariantCulture)));
+
+            CreateMap<CreateAuctionDto, Information>()
+                .ForMember(des => des.Image, obj => obj.MapFrom(src => src.Image))
+                .ForMember(des => des.InformationCreateDate, obj => obj.MapFrom(src => DateTime.Now))
+                .ForMember(des => des.Status, obj => obj.MapFrom(src => 1));
         }
     }
 }

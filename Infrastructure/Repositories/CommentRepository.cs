@@ -1,4 +1,6 @@
-﻿using Application.Interfaces.Comments;
+﻿using Application.Common.Dto.Page;
+using Application.Common.Paging;
+using Application.Interfaces.Comments;
 using Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
@@ -25,13 +27,14 @@ namespace Infrastructure.Repositories
             }
         }
 
-        public async Task<List<Comment>> GetAll()
+        public async Task<List<Comment>> GetAll(PageDto page)
         {
             try
             {
-                return await context.Comments
-                    .Include(c => c.User)
-                    .ToListAsync();
+                var query = context.Comments.AsQueryable();
+
+                return await PagingConfiguration<Comment>
+                    .Get(query.Include(c => c.User), page);
             }
             catch
             {

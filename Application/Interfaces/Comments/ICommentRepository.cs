@@ -1,4 +1,5 @@
-﻿using Domain.Entities;
+﻿using Application.Common.Dto.Page;
+using Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,7 @@ namespace Application.Interfaces.Comments
 {
     public interface ICommentRepository
     {
-        Task<List<Comment>> GetAll();
+        Task<List<Comment>> GetAll(PageDto page);
 
         Task Create(Comment comment);
     }

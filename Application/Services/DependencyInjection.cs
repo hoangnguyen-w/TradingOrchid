@@ -1,4 +1,5 @@
 ﻿using Application.Interfaces.Comments;
+using Application.Interfaces.Informations;
 using Application.Interfaces.Users;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.Configuration;
@@ -17,6 +18,7 @@ namespace Application.Services
         {
             services.AddScoped<IUserService, AuthenService>();
             services.AddScoped<ICommentService, CommentService>();
+            services.AddScoped<IInformationService, InformationService>();
 
             return services;
         }

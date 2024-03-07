@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace TradingOrchid.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("trading-orchid/[controller]")]
     [ApiController]
     [Authorize(Roles = "Admin")]
     public class UserController : Controller
@@ -20,7 +20,7 @@ namespace TradingOrchid.Controllers
             this.userService = userService;
         }
 
-        [HttpPost("GetAll")]
+        [HttpPost("get-all")]
         public async Task<ActionResult<List<User>>> GetAll(PageDto page)
         {
             var list = await userService.GetAll(page);
@@ -34,14 +34,14 @@ namespace TradingOrchid.Controllers
         }
 
 
-        [HttpGet("Search/{search}")]
+        [HttpGet("search/{search}")]
         public async Task<ActionResult<User>> Search(string search)
         {
             var list = await userService.Search(search);
             return Ok(list);
         }
 
-        [HttpPost("Create")]
+        [HttpPost("create")]
         public async Task<ActionResult> Create(RegisterDto registerDto)
         {
             await userService.Register(registerDto);
@@ -49,18 +49,18 @@ namespace TradingOrchid.Controllers
         }
 
 
-        [HttpPut("Update/{id}")]
+        [HttpPut("update-status/{id}")]
         public async Task<ActionResult> EditUser(int id)
         {
             await userService.Edit(id);
             throw new MyException("Thành công.", 200);
         }
 
-        [HttpDelete("Delete/{id}")]
+        /*[HttpDelete("Delete/{id}")]
         public async Task<ActionResult> DeleteUser(int id)
         {
             await userService.Delete(id);
             throw new MyException("Thành công.", 200);
-        }
+        }*/
     }
 }

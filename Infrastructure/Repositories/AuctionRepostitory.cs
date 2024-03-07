@@ -35,6 +35,22 @@ namespace Infrastructure.Repositories
                 var auction = context.Autions
                     .FirstOrDefault(a => a.AutionID == auctionId);
 
+                var user = context.Users
+                    .Where(u => u.UserID == userId)
+                    .FirstOrDefault();
+                    
+                if((user!.WalletBalance - bid) <= 0) 
+                {
+                    throw new MyException("Số dư tài khoản của bạn không đủ.", 404);
+                }else if(bid < auction!.StartingBid)
+                {
+                    throw new MyException("Số tiền không thấp hơn gía được đưa ra.", 404);
+                }
+                else if (bid > auction!.MaxBid)
+                {
+                    throw new MyException("Số tiền không cao hơn gía tối đa.", 404);
+                }
+
                 if (auction is not null)
                 {
                     var registerAuc = new RegisterAuction()
@@ -46,8 +62,10 @@ namespace Infrastructure.Repositories
                     };
 
                     auction.StartingBid = bid;
+                    user.WalletBalance = user.WalletBalance - bid;
                     context.Add(registerAuc);
                     context.Update(auction);
+                    context.Update(user);
                     await context.SaveChangesAsync();
                 }
                 else

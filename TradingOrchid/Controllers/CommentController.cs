@@ -19,7 +19,7 @@ namespace TradingOrchid.Controllers
             this.commentService = commentService;
         }
 
-        [HttpGet("GetAll")]
+        [HttpPost("GetAll")]
         public async Task<ActionResult<List<Comment>>> GetAll(PageDto page)
         {
             var list = await commentService.GetAll(page);

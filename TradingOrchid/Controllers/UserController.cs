@@ -20,7 +20,7 @@ namespace TradingOrchid.Controllers
             this.userService = userService;
         }
 
-        [HttpGet("GetAll")]
+        [HttpPost("GetAll")]
         public async Task<ActionResult<List<User>>> GetAll(PageDto page)
         {
             var list = await userService.GetAll(page);

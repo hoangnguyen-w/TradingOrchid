@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace TradingOrchid.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("trading-orchid/[controller]")]
     [ApiController]
     [Authorize(Roles = "Admin")]
     public class RoleController : Controller
@@ -20,7 +20,7 @@ namespace TradingOrchid.Controllers
             _roleRepository = roleRepository;
         }
 
-        [HttpGet("GetAll")]
+        [HttpGet("get-all")]
         public async Task<ActionResult<List<Role>>> GetAll()
         {
             var list = await _roleRepository.GetAll();
@@ -33,7 +33,7 @@ namespace TradingOrchid.Controllers
             return Ok(list);
         }
 
-        [HttpGet("GetByRoleID/{id}")]
+        [HttpGet("get-role-by-id/{id}")]
         public async Task<ActionResult<Role>> GetByID(int id)
         {
 
@@ -47,21 +47,21 @@ namespace TradingOrchid.Controllers
             return Ok(list);
         }
 
-        [HttpGet("GetByRoleName/{name}")]
+        [HttpGet("get-role-by-name/{name}")]
         public async Task<ActionResult<Role>> GetByName(string name)
         {
             var list = await _roleRepository.GetRoleByName(name);
             return Ok(list);
         }
 
-        [HttpPost("Create")]
+        [HttpPost("create")]
         public async Task<ActionResult> CreateRole(RoleDTO roleDTO)
         {
             await _roleRepository.CreateRole(roleDTO);
             throw new MyException("Tạo thành công '" + roleDTO.RoleName + "' .", 200);
         }
 
-        [HttpPut("Update/{id}")]
+        [HttpPut("update/{id}")]
         public async Task<ActionResult> EditRole(int id, RoleDTO roleDTO)
         {
 
@@ -76,7 +76,7 @@ namespace TradingOrchid.Controllers
             return Ok(roleDTO);
         }
 
-        [HttpDelete("Delete/{id}")]
+        [HttpDelete("delete/{id}")]
         public async Task<ActionResult> DeleteRole(int id)
         {
             var list = await _roleRepository.FindIDToResult(id);

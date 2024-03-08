@@ -1,15 +1,15 @@
 ﻿using Application.Common.Dto.Exception;
 using Application.Common.Dto.Page;
 using Application.Interfaces.Informations;
-using Application.Interfaces.Users;
-using Application.Services;
 using Domain.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace TradingOrchid.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("trading-orchid/[controller]")]
     [ApiController]
+    [Authorize(Roles = "Customer, Staff, Manager, Orchid Owner")]
     public class InformationController : Controller
     {
         private readonly IInformationService informationService;
@@ -19,7 +19,7 @@ namespace TradingOrchid.Controllers
             this.informationService = informationService;
         }
 
-        [HttpPost("GetAll")]
+        [HttpPost("get-all")]
         public async Task<ActionResult<List<User>>> GetAll(PageDto page)
         {
             var list = await informationService.GetAll(page);
@@ -33,7 +33,7 @@ namespace TradingOrchid.Controllers
         }
 
 
-        [HttpGet("Search/{search}")]
+        [HttpGet("search/{search}")]
         public async Task<ActionResult<User>> Search(string search)
         {
             var list = await informationService.Search(search);
@@ -41,7 +41,7 @@ namespace TradingOrchid.Controllers
         }
 
 
-        [HttpGet("GetByID/{id}")]
+        [HttpGet("get-by-id/{id}")]
         public async Task<ActionResult<User>> GetByID(int id)
         {
             var list = await informationService.GetByID(id);

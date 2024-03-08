@@ -10,7 +10,7 @@ using System.Text;
 
 namespace TradingOrchid.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("trading-orchid/[controller]")]
     [ApiController]
     public class AuthenController : ControllerBase
     {

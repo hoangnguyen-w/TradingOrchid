@@ -3,13 +3,14 @@ using Application.Common.Dto.Exception;
 using Application.Common.Dto.Page;
 using Application.Interfaces.Comments;
 using Domain.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace TradingOrchid.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("trading-orchid/[controller]")]
     [ApiController]
-    //[Authorize(Roles = "Admin")]
+    [Authorize(Roles = "Customer, Staff, Manager, Orchid Owner")]
     public class CommentController : Controller
     {
         private readonly ICommentService commentService;
@@ -19,7 +20,7 @@ namespace TradingOrchid.Controllers
             this.commentService = commentService;
         }
 
-        [HttpPost("GetAll")]
+        [HttpPost("get-all")]
         public async Task<ActionResult<List<Comment>>> GetAll(PageDto page)
         {
             var list = await commentService.GetAll(page);
@@ -32,7 +33,7 @@ namespace TradingOrchid.Controllers
             return Ok(list);
         }
 
-        [HttpPost("Create")]
+        [HttpPost("create")]
         public async Task<ActionResult> Create(CreateCommentDTO createCommentDTO)
         {
             await commentService.Create(createCommentDTO);

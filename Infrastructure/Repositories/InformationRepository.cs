@@ -44,7 +44,10 @@ namespace Infrastructure.Repositories
                 var query = context.Informations.AsQueryable();
 
                 return await PagingConfiguration<Information>
-                    .Get(query.Include(c => c.Aution).Include(c => c.User), page);
+                    .Get(query.Include(c => c.Aution)
+                    .Include(c => c.Comments)
+                    .ThenInclude(c => c.User)
+                    .Include(c => c.User), page);
             }
             catch
             {
@@ -59,6 +62,8 @@ namespace Infrastructure.Repositories
                 return await context.Informations
                     .Where(r => r.InformationID == id)
                     .Include(c => c.Aution)
+                    .Include(c => c.Comments)
+                    .ThenInclude(c => c.User)
                     .Include(c => c.User)
                     .ToListAsync();
             }
@@ -76,8 +81,50 @@ namespace Infrastructure.Repositories
                     .Where(r => r.InformationTitle.Trim().ToLower().Contains(search.Trim().ToLower()) ||
                                 r.Aution.AutionTitle.Trim().ToLower().Contains(search.Trim().ToLower()))
                     .Include(c => c.Aution)
+                    .Include(c => c.Comments)
+                    .ThenInclude(c => c.User)
                     .Include(c => c.User)
                     .ToListAsync();
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+        public async Task<List<Information>> GetByUserId(PageDto page, int userId)
+        {
+            try
+            {
+                var query = context.Informations.AsQueryable();
+
+                return await PagingConfiguration<Information>
+                    .Get(query.Where(c => c.UserID == userId)
+                    .Include(c => c.Aution)
+                    .Include(c => c.Comments)
+                    .ThenInclude(c => c.User)
+                    .Include(c => c.User), page);
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+        public async Task<List<Information>> GetByBeingRegiter(PageDto page, int userId)
+        {
+            try
+            {
+                var query = context.Informations.AsQueryable();
+
+                return await PagingConfiguration<Information>
+                    .Get(query
+                    .Include(c => c.Aution)
+                    .Include(c => c.Comments)
+                    .ThenInclude(c => c.User)
+                    .Include(c => c.User)
+                    .Where(c => c.Aution!.RegisterAuctions!
+                    .Any(r => r.UserID == userId)), page);
             }
             catch
             {

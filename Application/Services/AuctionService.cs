@@ -4,6 +4,7 @@ using Application.Interfaces.Auctions;
 using Application.Interfaces.Informations;
 using AutoMapper;
 using Domain.Entities;
+using System.Globalization;
 
 namespace Application.Services
 {
@@ -39,13 +40,24 @@ namespace Application.Services
         {
             try
             {
-                if(requestDto.StartingBid > requestDto.MaxBid)
+                DateTime expectedDate;
+                string[] formats = { "dd/MM/yyyy" };
+
+                if (requestDto.StartingBid > requestDto.MaxBid)
                 {
                     throw new MyException("Giá cao nhất không được thấp hơn giá khởi điểm.", 404);
                 }else if(requestDto.StartingBid < 0 
                     || requestDto.MaxBid < 0)
                 {
                     throw new MyException("Giá cao nhất và giá khởi điểm không được âm.", 404);
+                }else if(!DateTime.TryParseExact
+                    (requestDto.DateOpen, formats, new CultureInfo("en-US"),
+                    DateTimeStyles.None, out expectedDate) ||
+                    !DateTime.TryParseExact
+                    (requestDto.DateClose, formats, new CultureInfo("en-US"),
+                    DateTimeStyles.None, out expectedDate))
+                {
+                    throw new MyException("Định dạng ngày tháng năm yêu cầu: dd/MM/yyyy.", 404);
                 }
 
                 var auction = mapper.Map<Aution>(requestDto);

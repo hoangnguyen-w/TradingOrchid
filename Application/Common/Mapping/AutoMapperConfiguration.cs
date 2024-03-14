@@ -16,7 +16,7 @@ namespace Application.Common.Mapping
             //Login
             CreateMap<User, Token>()
                 .ForMember(des => des.UserName, obj => obj.MapFrom(src => src.UserName))
-                .ForMember(des => des.Role, obj => obj.MapFrom(src => src.Role.RoleName));
+                .ForMember(des => des.Role, obj => obj.MapFrom(src => src.Role!.RoleName));
 
             CreateMap<RegisterDto, User>()
                 .ForMember(des => des.PasswordHash, obj => obj.Ignore())
@@ -30,11 +30,11 @@ namespace Application.Common.Mapping
                 .ForMember(des => des.Email, obj => obj.MapFrom(src => src.Email))
                 .ForMember(des => des.WalletBalance, obj => obj.MapFrom(src => src.WalletBalance))
                 .ForMember(des => des.Phone, obj => obj.MapFrom(src => src.Phone))
-                .ForMember(des => des.RoleName , obj => obj.MapFrom(src => src.Role.RoleName));
+                .ForMember(des => des.RoleName , obj => obj.MapFrom(src => src.Role!.RoleName));
 
             CreateMap<Comment, ViewCommentDTO>()
                 .ForMember(des => des.CommentMsg, obj => obj.MapFrom(src => src.CommentMsg))
-                .ForMember(des => des.UserName, obj => obj.MapFrom(src => src.User.UserName));
+                .ForMember(des => des.UserName, obj => obj.MapFrom(src => src.User!.UserName));
 
             CreateMap<CreateCommentDTO, Comment>()
                 .ForMember(des => des.CommentMsg, obj => obj.MapFrom(src => src.CommentMsg))
@@ -45,10 +45,11 @@ namespace Application.Common.Mapping
 
             CreateMap<Information, InformationViewDTO>()
                 .ForMember(des => des.Image, obj => obj.MapFrom(src => src.Image))
-                .ForMember(des => des.InformationTitle, obj => obj.MapFrom(src => src.InformationTitle))
-                .ForMember(des => des.Title, obj => obj.MapFrom(src => src.Aution.AutionTitle))
-                .ForMember(des => des.Bid, obj => obj.MapFrom(src => src.Aution.StartingBid))
-                .ForMember(des => des.UserName, obj => obj.MapFrom(src => src.User.UserName));
+                .ForMember(des => des.Title, obj => obj.MapFrom(src => src.Aution!.AutionTitle))
+                .ForMember(des => des.Bid, obj => obj.MapFrom(src => src.Aution!.StartingBid))
+                .ForMember(des => des.UserName, obj => obj.MapFrom(src => src.User!.UserName))
+                .ForMember(des => des.Email, obj => obj.MapFrom(src => src.User!.Email))
+                .ForMember(des => des.viewCommentDTOs, obj => obj.MapFrom(src => src.Comments));
 
             CreateMap<CreateAuctionDto, Aution>()
                 .ForMember(des => des.AutionTitle, obj => obj.MapFrom(src => src.Title))
@@ -60,6 +61,7 @@ namespace Application.Common.Mapping
                 DateTime.ParseExact(src.DateClose, "dd/MM/yyyy", CultureInfo.InvariantCulture)));
 
             CreateMap<CreateAuctionDto, Information>()
+                .ForMember(des => des.UserID, obj => obj.MapFrom(src => src.UserId))
                 .ForMember(des => des.Image, obj => obj.MapFrom(src => src.Image))
                 .ForMember(des => des.InformationCreateDate, obj => obj.MapFrom(src => DateTime.Now))
                 .ForMember(des => des.Status, obj => obj.MapFrom(src => 1));

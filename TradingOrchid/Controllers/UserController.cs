@@ -2,7 +2,6 @@
 using Application.Common.Dto.Exception;
 using Application.Common.Dto.Page;
 using Application.Interfaces.Users;
-using Domain.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -21,7 +20,7 @@ namespace TradingOrchid.Controllers
         }
 
         [HttpPost("get-all")]
-        public async Task<ActionResult<List<User>>> GetAll(PageDto page)
+        public async Task<IActionResult> GetAll(PageDto page)
         {
             var list = await userService.GetAll(page);
 
@@ -35,14 +34,14 @@ namespace TradingOrchid.Controllers
 
 
         [HttpGet("search/{search}")]
-        public async Task<ActionResult<User>> Search(string search)
+        public async Task<IActionResult> Search(string search)
         {
             var list = await userService.Search(search);
             return Ok(list);
         }
 
         [HttpPost("create")]
-        public async Task<ActionResult> Create(RegisterDto registerDto)
+        public async Task<IActionResult> Create(RegisterDto registerDto)
         {
             await userService.Register(registerDto);
             throw new MyException("Thành công.", 200);
@@ -50,7 +49,7 @@ namespace TradingOrchid.Controllers
 
 
         [HttpPut("update-status/{id}")]
-        public async Task<ActionResult> EditUser(int id)
+        public async Task<IActionResult> EditUser(int id)
         {
             await userService.Edit(id);
             throw new MyException("Thành công.", 200);

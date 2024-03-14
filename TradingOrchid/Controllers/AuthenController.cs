@@ -46,7 +46,7 @@ namespace TradingOrchid.Controllers
 
         [AllowAnonymous]
         [HttpPost("register")]
-        public async Task<ActionResult> Register(RegisterDto registerDto)
+        public async Task<IActionResult> Register(RegisterDto registerDto)
         {
             await userService.Register(registerDto);
             throw new MyException("Thành công.", 200);

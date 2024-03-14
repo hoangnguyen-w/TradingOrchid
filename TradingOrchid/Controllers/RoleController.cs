@@ -1,13 +1,6 @@
-﻿using Application.Common.Dto.Exception;
-using Application.Common.Dto.Role;
-using Application.Interfaces.Roles;
-using Domain.Entities;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-
-namespace TradingOrchid.Controllers
+﻿namespace TradingOrchid.Controllers
 {
-    [Route("trading-orchid/[controller]")]
+    /*[Route("trading-orchid/[controller]")]
     [ApiController]
     [Authorize(Roles = "Admin")]
     public class RoleController : Controller
@@ -90,7 +83,7 @@ namespace TradingOrchid.Controllers
             throw new MyException("Xóa thành công '" + id + "' .", 200);
             //return Ok(list);
         }
-    }
+    }*/
 }
 
 

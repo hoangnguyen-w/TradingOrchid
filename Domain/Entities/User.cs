@@ -44,9 +44,9 @@ namespace Domain.Entities
 
         public virtual ICollection<RegisterAuction>? RegisterAuctions { get; set; }      
 
-        public virtual ICollection<Transaction> Transactions { get; set; }
+        public virtual ICollection<Transaction>? Transactions { get; set; }
 
-        public virtual ICollection<Comment> Comments { get; set; }
+        public virtual ICollection<Comment>? Comments { get; set; }
 
 
         //JWT

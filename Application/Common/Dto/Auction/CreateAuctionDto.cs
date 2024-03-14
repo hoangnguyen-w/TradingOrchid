@@ -9,5 +9,6 @@
         public float MaxBid { get; set; }
         public string DateOpen { get; set; }
         public string DateClose { get; set; }
+        public int UserId { get; set; }
     }
 }

@@ -1,7 +1,6 @@
 ﻿using Application.Interfaces.Auctions;
 using Application.Interfaces.Comments;
 using Application.Interfaces.Informations;
-using Application.Interfaces.Roles;
 using Application.Interfaces.Users;
 using Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;

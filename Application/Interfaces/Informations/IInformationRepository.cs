@@ -7,6 +7,10 @@ namespace Application.Interfaces.Informations
     {
         Task<List<Information>> GetAll(PageDto page);
 
+        Task<List<Information>> GetByUserId(PageDto page, int userId);
+
+        Task<List<Information>> GetByBeingRegiter(PageDto page, int userId);
+
         Task Insert(Information information);
 
         Task<List<Information>> GetByID(int id);

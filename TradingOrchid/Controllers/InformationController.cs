@@ -1,9 +1,9 @@
 ﻿using Application.Common.Dto.Exception;
 using Application.Common.Dto.Page;
 using Application.Interfaces.Informations;
-using Domain.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.IdentityModel.Tokens.Jwt;
 
 namespace TradingOrchid.Controllers
 {
@@ -20,7 +20,7 @@ namespace TradingOrchid.Controllers
         }
 
         [HttpPost("get-all")]
-        public async Task<ActionResult<List<User>>> GetAll(PageDto page)
+        public async Task<IActionResult> GetAll(PageDto page)
         {
             var list = await informationService.GetAll(page);
 
@@ -32,9 +32,51 @@ namespace TradingOrchid.Controllers
             return Ok(list);
         }
 
+        [HttpPost("get-by-user-id")]
+        public async Task<IActionResult> GetByUserId(PageDto page)
+        {
+            string encodedToken = HttpContext.Items["Token"]!.ToString()!;
+
+            var handler = new JwtSecurityTokenHandler();
+            var token = handler.ReadJwtToken(encodedToken);
+
+            int userId = Int32.Parse(token.Claims
+                .FirstOrDefault(c => c.Type == "userId")!.Value);
+
+            var list = await informationService.GetByUserId(page, userId);
+
+            if (list == null)
+            {
+                throw new MyException("Không tìm thấy.", 404);
+            }
+
+            return Ok(list);
+        }
+
+        [HttpPost("get-by-register")]
+        public async Task<IActionResult> GetByBeingRegiter(PageDto page)
+        {
+            string encodedToken = HttpContext.Items["Token"]!.ToString()!;
+
+            var handler = new JwtSecurityTokenHandler();
+            var token = handler.ReadJwtToken(encodedToken);
+
+            int userId = Int32.Parse(token.Claims
+                .FirstOrDefault(c => c.Type == "userId")!.Value);
+
+            var list = await informationService.GetByBeingRegiter(page, userId);
+
+            if (list == null)
+            {
+                throw new MyException("Không tìm thấy.", 404);
+            }
+
+            return Ok(list);
+        }
+
 
         [HttpGet("search/{search}")]
-        public async Task<ActionResult<User>> Search(string search)
+        public async Task<IActionResult> Search(string search)
         {
             var list = await informationService.Search(search);
             return Ok(list);
@@ -42,7 +84,7 @@ namespace TradingOrchid.Controllers
 
 
         [HttpGet("get-by-id/{id}")]
-        public async Task<ActionResult<User>> GetByID(int id)
+        public async Task<IActionResult> GetByID(int id)
         {
             var list = await informationService.GetByID(id);
             return Ok(list);

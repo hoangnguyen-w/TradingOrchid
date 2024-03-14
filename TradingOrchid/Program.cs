@@ -1,4 +1,5 @@
 using Application;
+using Application.Common.Middleware;
 using Infrastructure;
 using System.Reflection;
 
@@ -22,6 +23,8 @@ builder.Services
 // Add AutoMapper
 builder.Services.AddAutoMapper(Assembly.Load("Application"));
 
+builder.Services.AddTransient<StorageMiddlewarem>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -42,5 +45,7 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
+
+app.UseMiddleware<StorageMiddlewarem>();
 
 app.Run();

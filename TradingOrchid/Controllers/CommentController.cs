@@ -2,7 +2,6 @@
 using Application.Common.Dto.Exception;
 using Application.Common.Dto.Page;
 using Application.Interfaces.Comments;
-using Domain.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -20,8 +19,8 @@ namespace TradingOrchid.Controllers
             this.commentService = commentService;
         }
 
-        [HttpPost("get-all")]
-        public async Task<ActionResult<List<Comment>>> GetAll(PageDto page)
+        /*[HttpPost("get-all")]
+        public async Task<IActionResult> GetAll(PageDto page)
         {
             var list = await commentService.GetAll(page);
 
@@ -31,10 +30,10 @@ namespace TradingOrchid.Controllers
             }
 
             return Ok(list);
-        }
+        }*/
 
         [HttpPost("create")]
-        public async Task<ActionResult> Create(CreateCommentDTO createCommentDTO)
+        public async Task<IActionResult> Create(CreateCommentDTO createCommentDTO)
         {
             await commentService.Create(createCommentDTO);
             throw new MyException("Thành công.", 200);

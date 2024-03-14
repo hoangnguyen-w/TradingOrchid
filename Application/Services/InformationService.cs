@@ -21,8 +21,37 @@ namespace Application.Services
         {
             try
             {
-                var information = mapper.Map<List<InformationViewDTO>>(await informationRepository.GetAll(page));
-                return information;
+                var list = mapper.Map<List<InformationViewDTO>>
+                    (await informationRepository.GetAll(page));
+                return list;
+            }
+            catch (Exception e)
+            {
+                throw new MyException(e.Message, 500);
+            }
+        }
+
+        public async Task<List<InformationViewDTO>> GetByUserId(PageDto page, int userId)
+        {
+            try
+            {
+                var list = mapper.Map<List<InformationViewDTO>>
+                    (await informationRepository.GetByUserId(page, userId));
+                return list;
+            }
+            catch (Exception e)
+            {
+                throw new MyException(e.Message, 500);
+            }
+        }
+
+        public async Task<List<InformationViewDTO>> GetByBeingRegiter(PageDto page, int userId)
+        {
+            try
+            {
+                var list = mapper.Map<List<InformationViewDTO>>
+                    (await informationRepository.GetByBeingRegiter(page, userId));
+                return list;
             }
             catch (Exception e)
             {
@@ -34,7 +63,8 @@ namespace Application.Services
         {
             try
             {
-                var information = mapper.Map<List<InformationViewDTO>>(await informationRepository.GetByID(id));
+                var information = mapper.Map<List<InformationViewDTO>>
+                    (await informationRepository.GetByID(id));
                 return information;
             }
             catch (Exception e)
@@ -47,7 +77,8 @@ namespace Application.Services
         {
             try
             {
-                var information = mapper.Map<List<InformationViewDTO>>(await informationRepository.Search(search));
+                var information = mapper.Map<List<InformationViewDTO>>
+                    (await informationRepository.Search(search));
                 return information;
             }
             catch (Exception e)
